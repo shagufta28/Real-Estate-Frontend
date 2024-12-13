@@ -3,7 +3,6 @@ import { Box, Button, Modal } from '@mui/material'; // Corrected Modal import
 import { DatePicker } from '@mantine/dates';
 import { useMutation } from 'react-query';
 import UserDetailsContext from '../context/UserDetailsContext';
-import { bookVisit } from '../../../server/controllers/userController';
 import dayjs from 'dayjs';
 import { toast } from 'react-toastify';
 
@@ -31,11 +30,25 @@ const BookingModel = ({ opened, setOpened,email, propertyId }) => {
 
     const { mutate, isLoading } = useMutation({
         mutationFn: async () => {
-          try {
-            await bookVisit(value, propertyId, email, token);
-          } catch (err) {
-            // Display a more specific error message
-          }
+            try {
+                const response = await fetch('/api/bookVisit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({ value, propertyId, email }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error booking visit');
+                }
+
+                const data = await response.json();
+                return data;
+            } catch (err) {
+                toast.error("Error booking visit");
+            }
         },
         onSuccess: () => handleBookingSuccess(),
         onSettled: () => setOpened(false),
