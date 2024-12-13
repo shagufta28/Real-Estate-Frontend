@@ -90,7 +90,8 @@ const Navbar = () => {
                 <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 'auto' }}>
                     <Button component={NavLink} to="/" sx={{ color: "black", mr: 5 }}>Home</Button>
                     <Button component={NavLink} to="/properties" sx={{ color: "black", mr: 4 }}>Properties</Button>
-
+                     {/* ad property button */}
+                     <Button component={NavLink} to="/addproperty" sx={{ color: "black", mr: 4 }}>Add Property</Button>
                     {/* Login button */}
                     {!isAuthenticated ? (
                         <Button onClick={loginWithRedirect} variant="secondary" sx={{ backgroundColor: "rgb(201, 39, 39)", '&:hover': { backgroundColor: '#5aabda' } }}>

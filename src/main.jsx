@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Auth0Provider
      domain="realestate-project.us.auth0.com"
       clientId='DJrqIOYaIiBJnLjZ725dZSlfn01IPidI' 
-      authorizationParams={{redirect_uri:"http://localhost:5173"}} 
+      authorizationParams={{redirect_uri:"https://estateapp-sigma.vercel.app"}} 
       audience='https://real-estate-backend-ut61.onrender.com' 
       scope='openid profile email'>
         <MantineProvider
